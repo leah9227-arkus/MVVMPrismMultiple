@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="MVVMPrism.Views.ViewUsers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMPrism.Views"
+        mc:Ignorable="d"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+    >
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical" Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Username" />
+                <TextBox Width="150" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Text="Email" />
+                <TextBox Width="150" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <TextBlock Text="Password" />
+                <TextBox Width="150" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Image Height="70" Width="70" Source="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/OOjs_UI_icon_userAvatar.svg/1200px-OOjs_UI_icon_userAvatar.svg.png" />
+
+                <Button Content="Delete" Height="25" Width="60" Margin="0, 0, 10, 0" Command="{Binding DeleteUserCommand}" />
+                <Button Content="Update" Height="25" Width="60" Margin="0, 0, 10, 0" Command="{Binding UpdateUserCommand}" />
+                <Button Content="Insert" Height="25" Width="60" Margin="0, 0, 10, 0" Command="{Binding InsertUserCommand}" />
+            </StackPanel>
+
+            <ListView
+                Height="200"
+                ItemsSource="{Binding UserList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock
+                                FontSize="18"
+                                FontWeight="Bold"
+                                FontFamily="Cairo"
+                                Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>                
+            </ListView>
+        </StackPanel>
+    </Grid>
+</UserControl>
